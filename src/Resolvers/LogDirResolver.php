@@ -28,7 +28,7 @@ final class LogDirResolver
 			['/', '\\'],
 			DIRECTORY_SEPARATOR,
 			($this->logDir ?? ($this->rootDirResolver->get($this->logDirName)))
-			. ($customPath !== null ? '/' . $customPath : '')
+			. ($customPath !== null ? '/' . $customPath : ''),
 		);
 	}
 }

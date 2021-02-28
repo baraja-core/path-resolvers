@@ -21,7 +21,7 @@ final class RootDirResolver
 		return str_replace(
 			['/', '\\'],
 			DIRECTORY_SEPARATOR,
-			dirname($this->vendorResolver->get()) . ($customPath !== null ? '/' . $customPath : '')
+			dirname($this->vendorResolver->get()) . ($customPath !== null ? '/' . $customPath : ''),
 		);
 	}
 }

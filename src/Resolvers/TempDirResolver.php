@@ -28,7 +28,7 @@ final class TempDirResolver
 			['/', '\\'],
 			DIRECTORY_SEPARATOR,
 			($this->tempDir ?? ($this->rootDirResolver->get($this->tempDirName)))
-			. ($customPath !== null ? '/' . $customPath : '')
+			. ($customPath !== null ? '/' . $customPath : ''),
 		);
 	}
 }

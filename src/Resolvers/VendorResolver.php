@@ -38,7 +38,7 @@ final class VendorResolver
 			)
 		) {
 			$vendorDirFile = str_replace(DIRECTORY_SEPARATOR, '/', debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['file']);
-			$vendorDir = (string) preg_replace('/^(.+?\/vendor)(.*)$/', '$1', $vendorDirFile);
+			$vendorDir = (string) preg_replace('/^(.+?\/vendor)(.*)$/', '$1', (string) $vendorDirFile);
 		}
 		if ($vendorDir === null) {
 			throw new \RuntimeException('Can not resolve "vendorDir". Did you generate Composer autoloader by "composer install" or "composer dump" command?');

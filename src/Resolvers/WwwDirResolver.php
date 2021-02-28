@@ -27,7 +27,7 @@ final class WwwDirResolver
 		$trace = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
 		$last = end($trace);
 
-		if (isset($last['file']) === false) {
+		if ($last === false || isset($last['file']) === false) {
 			throw new \RuntimeException('WwwDir can not be detected. Did you use DI?');
 		}
 		if (str_ends_with($last['file'], DIRECTORY_SEPARATOR . 'index.php') === false) {

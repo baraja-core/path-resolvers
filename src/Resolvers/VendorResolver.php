@@ -19,14 +19,10 @@ final class VendorResolver
 
 	private function detect(): string
 	{
-		try {
-			if (class_exists(ClassLoader::class)) {
-				$loaderRc = new \ReflectionClass(ClassLoader::class);
-				$vendorDir = dirname((string) $loaderRc->getFileName(), 2) ?: null;
-			} else {
-				$vendorDir = null;
-			}
-		} catch (\ReflectionException) {
+		if (class_exists(ClassLoader::class)) {
+			$loaderRc = new \ReflectionClass(ClassLoader::class);
+			$vendorDir = dirname((string) $loaderRc->getFileName(), 2);
+		} else {
 			$vendorDir = null;
 		}
 		if (
@@ -37,8 +33,8 @@ final class VendorResolver
 				|| str_starts_with($vendorDir, '/usr/share')
 			)
 		) {
-			$vendorDirFile = str_replace(DIRECTORY_SEPARATOR, '/', debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['file']);
-			$vendorDir = (string) preg_replace('/^(.+?\/vendor)(.*)$/', '$1', (string) $vendorDirFile);
+			$vendorDirFile = str_replace(DIRECTORY_SEPARATOR, '/', debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS)[0]['file'] ?? '');
+			$vendorDir = (string) preg_replace('/^(.+?\/vendor)(.*)$/', '$1', $vendorDirFile);
 		}
 		if ($vendorDir === null) {
 			throw new \RuntimeException('Can not resolve "vendorDir". Did you generate Composer autoloader by "composer install" or "composer dump" command?');
